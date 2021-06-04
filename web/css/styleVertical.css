@@ -1,0 +1,232 @@
+/*ESTILOS LOGIN Y REGISTRO*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*{
+    border: 0;
+    margin: 0;
+    padding: 0;       
+}
+
+:root{
+
+    --dark-color:#191919;
+    --white-color:#FFFFFF;
+    --light-grey-color:#EAEAEA;	
+    --blue-color:#283071;
+    --blue-color:#2196d0;     
+    --gray-color:#F2F3F2;
+    --dark-gray:#8F98B3;
+    --orange-color:#FFAA42;
+    --gray-fondo:#F4F5FB;	
+}
+
+a:link{color: var(--blue-color);}
+a:visited{color: var(--blue-color);}
+a:hover{color: var(--white-color);}
+a:active{color: var(--white-color);}
+
+body{
+
+    background-size: 100%;	
+}
+
+/* Style the list */
+ul.breadcrumb {
+    padding: 10px 16px;
+    list-style: none;
+    background-color: #eee;
+}
+
+/* Display list items side by side */
+ul.breadcrumb li {
+    display: inline;
+    font-size: 18px;
+}
+
+/* Add a slash symbol (/) before/behind each list item */
+ul.breadcrumb li+li:before {
+    padding: 8px;
+    color: black;
+    content: "/\00a0";
+}
+
+/* Add a color to all links inside the list */
+ul.breadcrumb li a {
+    color: #0275d8;
+    text-decoration: none;
+}
+
+/* Add a color on mouse-over */
+ul.breadcrumb li a:hover {
+    color: #01447e;
+    text-decoration: underline;
+}
+
+.bg-blue{
+
+    background-color: var(--blue-color);
+}
+
+.bg-orange{
+
+    background-color: var(--orange-color
+        );
+}
+
+.btn-orange{
+    background-color:var(--orange-color);
+    color: var(--white-color);
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+.text-blue{
+    color: var(--blue-color);
+}
+
+
+.fondo{
+    background-color: var(--white-color);
+    /*min-height: 800px;*/	
+    padding: 40px;	
+    width: 100%;	
+}
+
+.fondo h1, h3{
+    color: var(--blue-color);
+}
+
+.fondo h2, h4{
+    color: var(--dark-gray);
+}
+
+.register{	
+    margin: 30px 20px;
+    padding: 40px;	
+    background:var(--gray-color);
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 5px 5px 5px #8F98B3;			    
+}
+
+.register h2{
+    color: #2196d0;
+    margin-bottom: 30px;
+}
+
+.register p{
+    margin-bottom: 30px;
+}
+
+.register label{   	
+    padding: 20px;   	
+    align-items: center;
+    /*color: var(--blue-color);	*/
+}
+
+.register  input {	       
+    padding: 10px;
+    font-size: 16px;	
+    background: var(--white-color);
+    border-radius: 10px;			     
+}
+
+.botones{
+
+    float: right;
+}
+
+.reset{	
+    padding: 10px;
+    font-size: 16px;		         
+    background: var(--dark-gray);
+    color: var(--white-color);    
+    cursor: pointer;   
+    height: auto;
+    border-radius: 10px;		
+    margin: 10px;
+    margin-left: 10px;
+
+}
+
+.submit{	
+    padding: 10px;
+    font-size: 16px;		         
+    background: var(--orange-color);
+    color: var(--white-color);    
+    cursor: pointer;   
+    height: auto;
+    border-radius: 10px;	
+    margin: 10px;
+    margin-right: 50px;	
+}
+
+.categoria{
+    padding: 10px;
+    font-size: 16px;	
+    background: var(--white-color);
+    border-radius: 10px;
+    width: 200px;
+}
+
+.register input:active,
+.register input:focus{
+    outline: none;
+}
+
+#fcred{
+    text-align: center;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+#wrapper {
+    overflow-x: hidden;
+}
+
+#sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+    width: 15rem;
+}
+
+#page-content-wrapper {
+    min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+}
+
+#dataConfirmModal{ background:#FFF;}
+
+
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+    }
+}
