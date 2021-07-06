@@ -172,6 +172,47 @@ public class CompraControlador extends HttpServlet {
 
                 break;
 
+            case "Borrar": //Borrar Registro
+
+                int idProducto = Integer.parseInt(request.getParameter("idp"));
+
+                for (int i = 0; i < listaCompras.size(); i++) {
+
+                    if (Integer.parseInt(listaCompras.get(i).getIdProducto()) == idProducto) {
+                        listaCompras.remove(i);
+                    }
+                }
+                break;
+
+            case "ActualizarCantidad": //Actualizar Cantidad
+
+                int idpro = Integer.parseInt(request.getParameter("idp"));
+                int cant = Integer.parseInt(request.getParameter("Cantidad"));
+
+                for (int i = 0; i < listaCompras.size(); i++) {
+
+                    if (Integer.parseInt(listaCompras.get(i).getIdProducto()) == idpro) {
+                        listaCompras.get(i).setCantidad(cant);
+                        double st = listaCompras.get(i).getPrecio() * cant;
+                        listaCompras.get(i).setSubtotal(st);
+                    }
+                }
+                break;
+
+            case "ListaTemporal": //Lista Temporal
+
+                totalPagar = 0.0;
+                request.setAttribute("lista", listaCompras);
+
+                for (int i = 0; i < listaCompras.size(); i++) {
+
+                    totalPagar = totalPagar + listaCompras.get(i).getSubtotal();
+                }
+                request.setAttribute("totalpagar", totalPagar);
+                request.getRequestDispatcher("nuevaCompra.jsp").forward(request, response);
+
+                break;
+
             case "limpiarTabla":
 
                 listaCompras.clear();

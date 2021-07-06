@@ -15,6 +15,10 @@
 <%@page import="modeloVO.ClienteVO"%>
 <%@page import="modeloVO.CompraVO"%>
 <%@page import="modeloDAO.CompraDAO"%>
+
+<%@ page import="java.util.*" %>
+<%@ page import="java.text.SimpleDateFormat"%>
+
 <%@page contentType="text/html"%>
 <%@page pageEncoding="ISO-8859-1"%>
 <%@page import="modeloVO.ProveedorVO"%>
@@ -27,6 +31,9 @@
         <link href="template/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/styleVertical.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" type="text/css" href="css/styleLogin.css"> 
+        <link href="alertifyjs/css/alertify.css" rel="stylesheet" type="text/css"/>
+        <link href="alertifyjs/css/themes/default.css" rel="stylesheet" type="text/css"/>
         <title>Nueva Compra Munin Inventarios</title>
     </head>
     <body>
@@ -103,7 +110,13 @@
                                             <input type="text" name="textNombre"  placeholder="Nombre Proveedor" value="${proveedor.getNombreProveedor()}" class="form-control" readonly >                               
                                         </div>
                                         <div class="col-xs-6 col-sm-6 col-md-5 col-lg-3 ">
-                                            <input type="date" name="textFecha" class="form-control" >                               
+                                            <%
+                                                Date dNow = new Date();
+                                                SimpleDateFormat ft
+                                                        = new SimpleDateFormat("MM/dd/yyyy");
+                                                String currentDate = ft.format(dNow);
+                                            %>
+                                            <input type="text" name="textFecha" value="<%=currentDate%>" class="form-control" readonly="" >                               
                                         </div>                                        
 
                                     </div> 
@@ -183,84 +196,91 @@
                         </div>
                     </div>
 
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <form action="Compra" method="post" id="frmNuevaVenta">
+
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 
 
-                        <div class="card">
-                            <div class="card-body">
+                            <div class="card">
+                                <div class="card-body">
 
 
 
-                                <table class="table table-hover table-sm table-responsive-xl table-bordered">
+                                    <table class="table table-hover table-sm table-responsive-xl">
 
-                                    <thead class="bg-blue text-white">
-                                        <tr>
-                                            <th>ITEM</th>                                            
-                                            <th>ID PROD</th>
-                                            <th>NOMBRE</th>                                            
-                                            <th>P.COMPRA</th>
-                                            <th>CANTIDAD</th>
-                                            <th>SUBTOTAL</th>
+                                        <thead class="bg-blue text-white text-center">
+                                            <tr>
+                                                <th>ITEM</th>                                            
+                                                <th>CÓDIGO</th>
+                                                <th>NOMBRE</th>                                            
+                                                <th>P.COMPRA</th>
+                                                <th>CANTIDAD</th>
+                                                <th>SUBTOTAL</th>
 
-                                        </tr>
-                                    </thead>
+                                            </tr>
+                                        </thead>
 
-                                    <tbody>
+                                        <tbody class="text-right">
 
-                                    <c:forEach var="list" items="${lista}">
+                                            <c:forEach var="list" items="${lista}">
 
-                                        <tr>
-                                            <td>${list.getItem()}</td>                                                
-                                            <td>${list.getIdProducto()}</td>
-                                            <td>${list.getDescripcionP()}</td>                                                
-                                            <td>$ ${list.getPrecio()}</td>
-                                            <td>${list.getCantidad()}</td>
-                                            <td>$ ${list.getSubtotal()}</td>
+                                                <tr>
+                                                    <td>${list.getItem()}</td>                                                
+                                                    <td>${list.getIdProducto()}</td>
+                                                    <td>${list.getDescripcionP()}</td>                                                
+                                                    <td>$ ${list.getPrecio()}</td>
+                                                    <td class="btn-group">
+                                                        <input type="hidden" id="idpro" value="${list.getIdProducto()}">
+                                                        <input type="number" id="Cantidad" value="${list.getCantidad()}" class="form-control col-md-8 text-center" min="1">
+                                                    </td>                                                    
+                                                    <td>$ ${list.getSubtotal()}</td>
 
-                                            <!--<td class="btn-group">                                                   
-                                                
-                                                <a class="btn btn-danger btn-sm text-white" style="margin-left: 5px">Borrar</a>                                                    
-                                                <a href="Venta?opcion=borrarFila" class="btn btn-danger btn-sm text-white">Cancelar</a> 
-                                            </td>-->
+                                                    <td class="btn-group">  
+                                                        
+                                                        <input type="hidden" id="idp" value="${list.getIdProducto()}">
+                                                        
+                                                        <a href="#" id="btnBorrar" class="btn btn-danger btn-sm text-white" style="margin-left: 5px">Borrar</a>
+                                                        
+                                                    </td>
 
-                                        </tr>
-
-
-                                    </c:forEach>                                        
-
-
-                                    </tbody>
-
-                                </table>
+                                                </tr>
 
 
+                                            </c:forEach>                                        
 
-                            </div>
 
-                            <div class="card-footer d-flex bg-white">
+                                        </tbody>
 
-                                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 ml-auto">
-                                    <input type="text" name="textTotal" value="$ ${totalpagar}" class="form-control">
+                                    </table>
+
+
+
+                                </div>
+
+                                <div class="card-footer d-flex bg-white">
+
+                                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 ml-auto">
+                                        <input type="text" name="textTotal" value="$ ${totalpagar}" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex bg-white">
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 ml-auto">
+                                        <!--<input type="reset" name="opcion" value="Cancelar" class="btn btn-danger">                                    
+    
+                                        -->
+                                        <a href="Compra?opcion=limpiarTabla" class="btn btn-light">Cancelar</a> 
+                                        <a href="Compra?opcion=GenerarCompra" class="btn btn-success text-white">Generar Compra</a> 
+
+
+                                    </div>                                
                                 </div>
                             </div>
-                            <div class="card-footer d-flex bg-white">
-                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 ml-auto">
-                                    <!--<input type="reset" name="opcion" value="Cancelar" class="btn btn-danger">                                    
-
-                                    -->
-                                    <a href="Compra?opcion=limpiarTabla" class="btn btn-light">Cancelar</a> 
-                                    <a href="Compra?opcion=GenerarCompra" class="btn btn-success text-white">Generar Compra</a> 
 
 
-                                </div>                                
-                            </div>
                         </div>
 
-
-                    </div>
-
-
+                    </form>
 
 
             </main>           
@@ -274,17 +294,21 @@
             </footer>            
         </div>
 
-        <!-- /#wrapper -->
-
         <!-- Bootstrap core JavaScript -->
         <script src="template/jquery.min.js"></script>
         <script src="template/bootstrap.bundle.min.js"></script>
 
-        <script src="js/scriptUsuario.js" type="text/javascript"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+                integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
+
+
+
         <script src="alertifyjs/alertify.js" ></script>          
         <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
-
-
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="js/scriptUsuario.js" type="text/javascript"></script>
 
         <!-- Menu Toggle Script -->
         <script>

@@ -7,6 +7,8 @@
 <%@page import="modeloVO.PerfilVO"%>
 <%@page import="javax.servlet.http.HttpSession"%>
 <%@page import="modeloVO.UsuarioVO"%>
+<%@page contentType="text/html"%>
+<%@page pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="Sesiones.jsp" %>
 <!DOCTYPE html>
@@ -24,6 +26,7 @@
         <script src="js/Logica.js" type="text/javascript"></script>        
         <link href="alertifyjs/css/alertify.css" rel="stylesheet" type="text/css"/>
         <link href="alertifyjs/css/themes/default.css" rel="stylesheet" type="text/css"/>
+        
         <title>Munin Inventarios</title>
     </head>
     <body>
@@ -96,7 +99,7 @@
                             </a>                            
                         </div>
 
-                                                                        
+
 
                     </div>
 
@@ -179,6 +182,8 @@
     <script src="template/bootstrap.bundle.min.js"></script>
     <script src="alertifyjs/alertify.js" ></script>    
     <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="js/scriptUsuario.js" type="text/javascript"></script>
 
     <!-- Menu Toggle Script -->
     <script>

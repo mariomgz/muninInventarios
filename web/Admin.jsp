@@ -51,10 +51,10 @@
                             <i class="fa fa-tachometer mr-3" aria-hidden="true"></i>CONFIGURACION
                         </a>
                         <div id="configuracion" class="collapse" data-parent="#sidebar-accordion">
-                            <a href="" target="myFrame" class="list-group-item list-group-item-action bg-white text-dark pl-5">
+                            <a href="categoria.jsp" target="myFrame" class="list-group-item list-group-item-action bg-white text-dark pl-5">
                                 Gestión Categorías
                             </a>
-                            <a href="" target="myFrame" class="list-group-item list-group-item-action bg-white text-dark pl-5">
+                            <a href="bodega.jsp" target="myFrame" class="list-group-item list-group-item-action bg-white text-dark pl-5">
                                 Gestión Bodegas
                             </a>
                         </div>

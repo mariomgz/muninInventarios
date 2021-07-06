@@ -47,14 +47,66 @@ $(function () {
     });
 });
 
+$(document).ready(function () {
 
+    $("#frmNuevaVenta tr #btnBorrar").click(function () {
 
+        //var correo = $('#frmRegistro #correo').val();
+        var idp = $(this).parent().find("#idp").val();
+        //var idp = $('#idp').val();
 
+        swal({
+            title: "Seguro quieres borrar el registro?",
+            //text: "Una vex borrado, no podrás recuperar el registro",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        eliminar(idp);
+                        swal("Registro borrado correctamente", {
+                            icon: "success",
+                        }).then((willDelete) => {
+                            if (willDelete) {
+                                location.href = "Venta?opcion=ListaTemporal";
+                            }
+                        });
+                    }
+                });
 
+    });
 
+    function eliminar(idp) {
 
+        var url = "Venta?opcion=Borrar";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: "idp=" + idp,
+            success: function (data, textStatus, jqXHR) {
 
+            }
 
+        })
+    }
 
+    $("#frmNuevaVenta tr #Cantidad").click(function () {
 
+        var idp = $(this).parent().find("#idpro").val();
+        var cantidad = $(this).parent().find("#Cantidad").val();
 
+        var url = "Venta?opcion=ActualizarCantidad";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: "idp=" + idp + "&Cantidad=" + cantidad,
+            success: function (data, textStatus, jqXHR) {
+                location.href = "Venta?opcion=ListaTemporal";
+            }
+
+        });
+
+    });
+
+});

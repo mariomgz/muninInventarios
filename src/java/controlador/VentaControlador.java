@@ -224,24 +224,52 @@ public class VentaControlador extends HttpServlet {
                     request.setAttribute("mensajeError", "La venta NO existe");
                 }
                 request.getRequestDispatcher("venta.jsp").forward(request, response);
-                break;
-
+                break;*/
             case "Borrar": //Borrar Registro
 
-                if (ventaDAO.borrarRegistro()) {
+                int idProducto = Integer.parseInt(request.getParameter("idp"));
 
-                    request.setAttribute("mensajeExito", "La venta se borró correctamente");
+                for (int i = 0; i < listaVentas.size(); i++) {
 
-                } else {
-                    request.setAttribute("mensajeError", "la venta NO se eliminó");
+                    if (Integer.parseInt(listaVentas.get(i).getIdProducto()) == idProducto) {
+                        listaVentas.remove(i);
+                    }
                 }
-                request.getRequestDispatcher("cliente.jsp").forward(request, response);
-                break;*/
+                break;
+
+            case "ActualizarCantidad": //Actualizar Cantidad
+
+                int idpro = Integer.parseInt(request.getParameter("idp"));
+                int cant = Integer.parseInt(request.getParameter("Cantidad"));
+
+                for (int i = 0; i < listaVentas.size(); i++) {
+
+                    if (Integer.parseInt(listaVentas.get(i).getIdProducto()) == idpro) {
+                        listaVentas.get(i).setCantidad(cant);
+                        double st = listaVentas.get(i).getPrecio() * cant;
+                        listaVentas.get(i).setSubtotal(st);
+                    }
+                }
+                break;
+
+            case "ListaTemporal": //Lista Temporal
+                                
+                totalPagar = 0.0;
+                request.setAttribute("lista", listaVentas);                
+
+                for (int i = 0; i < listaVentas.size(); i++) {
+
+                    totalPagar = totalPagar + listaVentas.get(i).getSubtotal();
+                }
+                request.setAttribute("totalpagar", totalPagar);
+                request.getRequestDispatcher("nuevaVenta.jsp").forward(request, response);
+
+                break;
+
             case "limpiarTabla":
 
                 listaVentas.clear();
 
-            
             default:
 
                 request.getRequestDispatcher("nuevaVenta.jsp").forward(request, response);

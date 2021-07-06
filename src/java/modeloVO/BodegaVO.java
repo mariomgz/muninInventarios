@@ -11,14 +11,20 @@ package modeloVO;
  */
 public class BodegaVO {
 
-    private String bodegaId, nombreBodega;
+    private String bodegaId, nombreBodega, ubicacion;
 
-    public BodegaVO() {
+    public BodegaVO(String bodegaId, String nombreBodega, String ubicacion) {
+        this.bodegaId = bodegaId;
+        this.nombreBodega = nombreBodega;
+        this.ubicacion = ubicacion;
     }
 
     public BodegaVO(String bodegaId, String nombreBodega) {
         this.bodegaId = bodegaId;
         this.nombreBodega = nombreBodega;
+    }
+
+    public BodegaVO() {
     }
 
     public String getBodegaId() {
@@ -35,6 +41,14 @@ public class BodegaVO {
 
     public void setNombreBodega(String nombreBodega) {
         this.nombreBodega = nombreBodega;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
 
 }
