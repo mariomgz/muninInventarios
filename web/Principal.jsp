@@ -26,7 +26,7 @@
         <script src="js/Logica.js" type="text/javascript"></script>        
         <link href="alertifyjs/css/alertify.css" rel="stylesheet" type="text/css"/>
         <link href="alertifyjs/css/themes/default.css" rel="stylesheet" type="text/css"/>
-        
+
         <title>Munin Inventarios</title>
     </head>
     <body>
@@ -34,25 +34,31 @@
 
             <!-- Sidebar -->
             <div class=" bg-blue  border-right" id="sidebar-wrapper">
-                <div class="text-white sidebar-heading">Munin Inventarios</div>
+                
+                <div class="text-white sidebar-heading">
+                    
+                    <a href="Principal.jsp"><img  src="images/logoMunin_blanco.png" style=" width: 100px;display: block; margin-left: auto;margin-right: auto"</a>
+                
+                </div>                
+                
                 <div id="sidebar-accordion" class="accordion">
                     <div class="list-group ">
                         <a href="index.jsp" target="myFrame" class="list-group-item list-group-item-action bg-light text-blue">
-                            <i class="fa fa-shopping-cart mr-3" aria-hidden="true"></i>INICIO
+                            <i class="mr-3 material-icons" aria-hidden="true">home</i>INICIO
                         </a>
                         <a href="#cliente" data-toggle="collapse" aria-expanded="false"
                            class="list-group-item list-group-item-action bg-light text-blue">
-                            <i class="fa fa-tachometer mr-3" aria-hidden="true"></i>CLIENTES
+                            <i class="mr-3 material-icons" aria-hidden="true">group</i>CLIENTES
                         </a>
                         <div id="cliente" class="collapse" data-parent="#sidebar-accordion">
                             <a href="cliente.jsp"  target="myFrame"  class="list-group-item list-group-item-action bg-white text-dark pl-5">
                                 Gestión Clientes
-                            </a>                            
+                            </a>                                             
 
                         </div>
                         <a href="#proveedor" data-toggle="collapse" aria-expanded="false"
                            class="list-group-item list-group-item-action bg-light text-blue">
-                            <i class="fa fa-tachometer mr-3" aria-hidden="true"></i>PROVEEDORES
+                            <i class="mr-3 material-icons" aria-hidden="true">engineering</i>PROVEEDORES
                         </a>
                         <div id="proveedor" class="collapse" data-parent="#sidebar-accordion">
                             <a href="proveedor.jsp"  target="myFrame"  class="list-group-item list-group-item-action bg-white text-dark pl-5">
@@ -62,7 +68,7 @@
                         </div>                        
                         <a href="#producto" data-toggle="collapse" aria-expanded="false"
                            class="list-group-item list-group-item-action bg-light text-blue">
-                            <i class="fa fa-tachometer mr-3" aria-hidden="true"></i>PRODUCTOS
+                            <i class="mr-3 material-icons" aria-hidden="true">inventory</i>PRODUCTOS
                         </a>
                         <div id="producto" class="collapse" data-parent="#sidebar-accordion">
                             <a href="producto.jsp" target="myFrame" class="list-group-item list-group-item-action bg-white text-dark pl-5">
@@ -72,7 +78,7 @@
                         </div>
                         <a href="#venta" data-toggle="collapse" aria-expanded="false"
                            class="list-group-item list-group-item-action bg-light text-blue">
-                            <i class="fa fa-tachometer mr-3" aria-hidden="true"></i>VENTAS
+                            <i class="mr-3 material-icons" aria-hidden="true">unarchive</i>VENTAS
                         </a>
                         <div id="venta" class="collapse" data-parent="#sidebar-accordion">
                             <!--
@@ -86,7 +92,7 @@
                         </div>
                         <a href="#compra" data-toggle="collapse" aria-expanded="false"
                            class="list-group-item list-group-item-action bg-light text-blue">
-                            <i class="fa fa-tachometer mr-3" aria-hidden="true"></i>COMPRAS
+                            <i class="mr-3 material-icons" aria-hidden="true">archive</i>COMPRAS
                         </a>
                         <div id="compra" class="collapse" data-parent="#sidebar-accordion">
                             <!--
@@ -112,7 +118,7 @@
             <div id="page-content-wrapper">
 
                 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                    <button class="btn btn-info" id="menu-toggle">Menú </button>
+                    <button class="btn btn-info material-icons" id="menu-toggle">menu </button>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -126,8 +132,10 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="Cliente" id="navbarDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="mr-3 material-icons text-blue" aria-hidden="true">account_circle</i>
 
                                     <%=datVO.getUsuNombre()%>  <%=datVO.getUsuApellido()%>                                     
+                                    
 
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -137,7 +145,7 @@
                                  <a class="dropdown-item" href="#"><%=datVO.getUsuLogin()%> </a>-->
 
                                     <form>
-                                        <select onchange="enlace(value)" class="form-control border-0">
+                                        <select onchange="enlace(value)" class="form-control border-0 custom-select">
                                             <option>Perfil</option>
 
                                             <%
@@ -152,9 +160,11 @@
                                     </form>
                                     <div class="dropdown-divider"></div>
                                     <form action="Sesiones" method="post">
-                                        <button name="opcion" value="" class="dropdown-item" href="#">Salir</button>
+                                        <button name="opcion" value="" class="dropdown-item" href="#">
+                                            <i class="mr-3 material-icons text-blue" aria-hidden="true">logout</i>
+                                            Salir</button>
                                     </form>
-                                    <a </a>
+                                    
                                 </div>
                             </li>
                         </ul>

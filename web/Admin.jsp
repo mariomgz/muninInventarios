@@ -32,13 +32,17 @@
 
             <!-- Sidebar -->
             <div class=" bg-blue  border-right" id="sidebar-wrapper">
-                <div class="text-white sidebar-heading">Munin Inventarios</div>
+                <div class="text-white sidebar-heading">
+                    
+                    <a href="Admin.jsp"><img  src="images/logoMunin_blanco.png" style=" width: 100px;display: block; margin-left: auto;margin-right: auto"</a>
+                
+                </div> 
                 <div id="sidebar-accordion" class="accordion">
                     <div class="list-group ">                        
 
                         <a href="#reportes" data-toggle="collapse" aria-expanded="false"
                            class="list-group-item list-group-item-action bg-light text-blue">
-                            <i class="fa fa-tachometer mr-3" aria-hidden="true"></i>REPORTES
+                            <i class="fa fa-tachometer mr-3 material-icons" aria-hidden="true">analytics</i>REPORTES
                         </a>
                         <div id="reportes" class="collapse" data-parent="#sidebar-accordion">
                             <a href="reporteInventario.jsp" target="myFrame" class="list-group-item list-group-item-action bg-white text-dark pl-5">
@@ -48,7 +52,7 @@
                         </div>
                         <a href="#configuracion" data-toggle="collapse" aria-expanded="false"
                            class="list-group-item list-group-item-action bg-light text-blue">
-                            <i class="fa fa-tachometer mr-3" aria-hidden="true"></i>CONFIGURACION
+                            <i class="fa fa-tachometer mr-3 material-icons" aria-hidden="true">settings</i>CONFIGURACION
                         </a>
                         <div id="configuracion" class="collapse" data-parent="#sidebar-accordion">
                             <a href="categoria.jsp" target="myFrame" class="list-group-item list-group-item-action bg-white text-dark pl-5">
@@ -72,7 +76,7 @@
             <div id="page-content-wrapper">
 
                 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                    <button class="btn btn-info" id="menu-toggle">Menú </button>
+                    <button class="btn btn-info material-icons" id="menu-toggle">menu </button>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -86,6 +90,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="Cliente" id="navbarDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="mr-3 material-icons text-blue" aria-hidden="true">account_circle</i>
 
                                     <%=datVO.getUsuNombre()%>  <%=datVO.getUsuApellido()%>                                     
 
@@ -112,9 +117,11 @@
                                     </form>
                                     <div class="dropdown-divider"></div>
                                     <form action="Sesiones" method="post">
-                                        <button name="opcion" value="" class="dropdown-item" href="#">Salir</button>
+                                        <button name="opcion" value="" class="dropdown-item" href="#">
+                                            <i class="mr-3 material-icons text-blue" aria-hidden="true">logout</i>
+                                            Salir</button>
                                     </form>
-                                    <a </a>
+                                    
                                 </div>
                             </li>
                         </ul>

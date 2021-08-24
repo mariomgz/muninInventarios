@@ -41,7 +41,9 @@
                     <h3>Gestión Categorías</h3>
                 </div>
 
-                <br>                
+                <br>  
+                
+                <!--
 
                 <form action="Categoria" method="post" autocomplete="off">
                     <div class="d-flex col-lg-4 ml-auto">
@@ -52,6 +54,8 @@
                     </div>
 
                 </form>
+                
+                -->
 
                 <div class="container">
                     <%                                    if (request.getAttribute(
@@ -126,12 +130,13 @@
 
                                 <form>
 
-                                    <table class="table table-hover table-sm table-responsive-xl">
+                                    <table class="table table-hover table-sm table-responsive-xl" id="tablax">
 
                                         <thead class="thead-light">
                                             <tr>                                        
                                                 <th>ID</th>                                        
-                                                <th>NOMBRE CATEGORÍA</th>                                                                                       
+                                                <th>NOMBRE CATEGORÍA</th>
+                                                <th></th> 
 
                                             </tr>
                                         </thead>    
@@ -162,7 +167,7 @@
 
                                                 <td class="btn-group">
 
-                                                    <a class="btn btn-sm bg-blue text-white" href="Categoria?opcion=Editar&documento=<%=categoriaVO.getCategoriaId()%>"  >Editar</a>
+                                                    <a class="material-icons" style="color: #2196d0" href="Categoria?opcion=Editar&documento=<%=categoriaVO.getCategoriaId()%>"  >edit</a>
                                                     <!--
                                                     <a class="btn btn-danger btn-sm text-white" style="margin-left: 5px" href="Categoria?opcion=Borrar&documento=<%=categoriaVO.getCategoriaId()%>"
                                                        onclick="return confirm('Estás seguro que deseas eliminar el registro?')">Borrar</a>
@@ -204,14 +209,52 @@
                 <script src="template/jquery.min.js"></script>
                 <script src="template/bootstrap.bundle.min.js"></script>
 
+                <!-- DATATABLES -->
+                <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
+                </script>
+                <!-- BOOTSTRAP -->
+                <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js">
+                </script>
+                <script>
+                    $(document).ready(function () {
+                        $('#tablax').DataTable({
+                            language: {
+                                processing: "Tratamiento en curso...",
+                                search: "Buscar&nbsp;:",
+                                lengthMenu: "Agrupar de _MENU_ items",
+                                info: "Registros del _START_ al _END_ de un total de _TOTAL_",
+                                infoEmpty: "No existen datos.",
+                                infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                                infoPostFix: "",
+                                loadingRecords: "Cargando...",
+                                zeroRecords: "No se encontraron datos con tu busqueda",
+                                emptyTable: "No hay datos disponibles en la tabla.",
+                                paginate: {
+                                    first: "Primero",
+                                    previous: "Anterior",
+                                    next: "Siguiente",
+                                    last: "Ultimo"
+                                },
+                                aria: {
+                                    sortAscending: ": active para ordenar la columna en orden ascendente",
+                                    sortDescending: ": active para ordenar la columna en orden descendente"
+                                }
+                            },
+                            scrollY: 400,
+                            lengthMenu: [[8, 25, -1], [8, 25, "All"]],
+                            "bLengthChange": false
+                        });
+                    });
+                </script>
+
 
 
                 <!-- Menu Toggle Script -->
                 <script>
-                                                           $("#menu-toggle").click(function (e) {
-                                                               e.preventDefault();
-                                                               $("#wrapper").toggleClass("toggled");
-                                                           });
+                    $("#menu-toggle").click(function (e) {
+                        e.preventDefault();
+                        $("#wrapper").toggleClass("toggled");
+                    });
                 </script>
 
                 </html>

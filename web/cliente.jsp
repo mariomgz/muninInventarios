@@ -26,7 +26,8 @@
         <link href="css/styleVertical.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link href="alertifyjs/css/alertify.css" rel="stylesheet" type="text/css"/>
-        <link href="alertifyjs/css/themes/default.css" rel="stylesheet" type="text/css"/>
+        <link href="alertifyjs/css/themes/default.css" rel="stylesheet" type="text/css"/>        
+
         <title>Clientes Munin Inventarios</title>
     </head>
 
@@ -38,22 +39,25 @@
                         <li class="breadcrumb-item"><a href="index.jsp">Inicio</a></li>                                
                         <li class="breadcrumb-item active" aria-current="page">Gestión Clientes</li>
                     </ol>
-                </nav>
-
+                </nav>  
                 <div>
+
                     <h3>Gestión Clientes</h3>
                 </div>
-                <br>                 
+                <br> 
 
+
+                <!--
                 <form action="Cliente" method="post" autocomplete="off"  onsubmit="return registrar()">
                     <div class="d-flex col-lg-4 ml-auto">
                         <label>Consultar Documento</label>
                         <input type="text" name="textId" class="form-control border-info">
                         <input type="hidden" value="Consultar" name="opcion">
-
+        
                     </div>
-
+        
                 </form>
+                -->
 
                 <div class="container">
                     <%                                    if (request.getAttribute(
@@ -64,8 +68,8 @@
                         <% } else {%> 
                     <div style="color: #2196d0;">
                         ${mensajeExito}</div>
-                        
-                        <%}%>  
+
+                    <%}%>  
                 </div>
                 <br>
 
@@ -149,7 +153,7 @@
                                         <option   class="form-control"
                                                   value="<%=ciudadVO.getCiudadId()%>"><%=ciudadVO.getNombreCiudad()%></option>
                                         <%}
-                                                } else {%>
+                                } else {%>
                                         <option>Seleccione...</option>
                                         <%
                                             CiudadDAO ciudadDAO = new CiudadDAO();
@@ -211,10 +215,6 @@
 
                             </form>
 
-
-
-
-
                         </div> 
 
                     </div>
@@ -223,7 +223,7 @@
 
                         <form action="Cliente" method="post" id="frmCliente">
 
-                            <table class="table table-hover table-sm table-responsive-xl">
+                            <table class="table table-hover table-sm table-responsive-xl" id="tablax">
 
                                 <thead class="thead-light">
                                     <tr>                                        
@@ -233,6 +233,7 @@
                                         <th>CIUDAD</th> 
                                         <th>TELÉFONO</th>                                        
                                         <th>EMAIL</th>
+                                        <th></th>
                                     </tr>
                                 </thead>    
 
@@ -263,10 +264,10 @@
 
                                         <td class="btn-group">
 
-                                            <a type="submit"class="btn btn-sm bg-blue text-white" href="Cliente?opcion=Editar&documento=<%=clienteVO.getClienteId()%>" 
-                                               id="borrar">Editar</a>
-                                            <a class="btn btn-danger btn-sm text-white" style="margin-left: 5px" href="Cliente?opcion=Borrar&documento=<%=clienteVO.getClienteId()%> " 
-                                               onclick="return confirm('Estás seguro que deseas eliminar el registro?')" >Borrar</a>
+                                            <a type="submit"class="material-icons" style="color: #2196d0" href="Cliente?opcion=Editar&documento=<%=clienteVO.getClienteId()%>" 
+                                               id="borrar">edit</a>
+                                            <a class="material-icons" style="margin-left: 5px; color: red" href="Cliente?opcion=Borrar&documento=<%=clienteVO.getClienteId()%> " 
+                                               onclick="return confirm('Estás seguro que deseas eliminar el registro?')" >delete</a>
 
                                         </td>
 
@@ -305,32 +306,53 @@
 <script src="template/bootstrap.bundle.min.js"></script>
 <script src="alertifyjs/alertify.js" ></script>
 <script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
+<!-- DATATABLES -->
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
+</script>
+<!-- BOOTSTRAP -->
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js">
+</script>
+<script>
+    $(document).ready(function () {
+        $('#tablax').DataTable({
+            language: {
+                processing: "Tratamiento en curso...",
+                search: "Buscar&nbsp;:",
+                lengthMenu: "Agrupar de _MENU_ items",
+                info: "Registros del _START_ al _END_ de un total de _TOTAL_",
+                infoEmpty: "No existen datos.",
+                infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                infoPostFix: "",
+                loadingRecords: "Cargando...",
+                zeroRecords: "No se encontraron datos con tu busqueda",
+                emptyTable: "No hay datos disponibles en la tabla.",
+                paginate: {
+                    first: "Primero",
+                    previous: "Anterior",
+                    next: "Siguiente",
+                    last: "Ultimo"
+                },
+                aria: {
+                    sortAscending: ": active para ordenar la columna en orden ascendente",
+                    sortDescending: ": active para ordenar la columna en orden descendente"
+                }
+            },
+            scrollY: 400,
+            lengthMenu: [[8, 25, -1], [8, 25, "All"]],
+            "bLengthChange": false
+            
+        });
+    });
+</script>
 
 
 <!-- Menu Toggle Script -->
 <script>
-                                           $("#menu-toggle").click(function (e) {
-                                               e.preventDefault();
-                                               $("#wrapper").toggleClass("toggled");
-                                           });
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
 </script>
 
 </html>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        $('#confirm').click(function () {
-            alertify.confirm('Confirm Title', 'Confirm Message', function () {
-                alertify.success('Ok')
-            }
-            , function () {
-                alertify.error('Cancel')
-            });
-            Run
-            Overloads
-
-            //alertify.success("este es un mensaje de exito");
-        });
-    });
-</script>

@@ -113,7 +113,7 @@
                                             <%
                                                 Date dNow = new Date();
                                                 SimpleDateFormat ft
-                                                        = new SimpleDateFormat("MM/dd/yyyy");
+                                                        = new SimpleDateFormat("dd/MM/yyyy");
                                                 String currentDate = ft.format(dNow);
                                             %>
                                             <input type="text" name="textFecha" value="<%=currentDate%>" class="form-control" readonly="" >                               
@@ -240,7 +240,7 @@
                                                         
                                                         <input type="hidden" id="idp" value="${list.getIdProducto()}">
                                                         
-                                                        <a href="#" id="btnBorrar" class="btn btn-danger btn-sm text-white" style="margin-left: 5px">Borrar</a>
+                                                        <a href="#" id="btnBorrar" class="btn btn-danger btn-sm text-white material-icons" style="margin-left: 5px">delete</a>
                                                         
                                                     </td>
 
