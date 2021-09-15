@@ -8,7 +8,7 @@
 <%@page import="modeloDAO.ClienteDAO"%>
 <%@page import="modeloDAO.ProductoDAO"%>
 <%@page import="modeloVO.UsuarioVO"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modeloVO.ProductoVO"%>
@@ -34,265 +34,344 @@
         <link rel="stylesheet" type="text/css" href="css/styleLogin.css"> 
         <link href="alertifyjs/css/alertify.css" rel="stylesheet" type="text/css"/>
         <link href="alertifyjs/css/themes/default.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css"> 
+
         <title>Nueva Compra Munin Inventarios</title>
+        <link rel="apple-touch-icon" href="app-assets/images/ico/apple-icon-120.png">
+        <link rel="shortcut icon" type="image/x-icon" href="app-assets/images/ico/favicon.ico">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
+              rel="stylesheet">
+
+        <!-- BEGIN: Vendor CSS-->
+        <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/vendors.min.css">        
+        <!-- END: Vendor CSS-->
+
+        <!-- BEGIN: Theme CSS-->
+        <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap.css">
+        <!--
+        <link rel="stylesheet" type="text/css" href="app-assets/css/bootstrap-extended.css">  -->      
+        <link rel="stylesheet" type="text/css" href="app-assets/css/colors.css">
+        <link rel="stylesheet" type="text/css" href="app-assets/css/components.css">
+        <link rel="stylesheet" type="text/css" href="app-assets/css/themes/dark-layout.css">
+        <link rel="stylesheet" type="text/css" href="app-assets/css/themes/bordered-layout.css">
+
+        <!-- BEGIN: Page CSS-->
+        <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu.css">
+
+        <!-- END: Page CSS-->
+
+        <!-- BEGIN: Custom CSS-->
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <!-- END: Custom CSS-->
+
     </head>
-    <body>
-        <div class="container">
-            <main>
 
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb bg-white">
-                        <li class="breadcrumb-item"><a href="index.jsp">Inicio</a></li>                                
-                        <li class="breadcrumb-item active" aria-current="page">Nueva Compra</li>
-                    </ol>
-                </nav>
-                <!--
-                <div>
-                    <h3>Nueva Compra</h3>
-                </div>-->
-
-                <div class="container">
-                    <%                                    if (request.getAttribute(
-                                "mensajeError") != null) {
-                    %>
-                    <div style="color: red;">
-                        ${mensajeError}</div>
-                        <% } else {%> 
-                    <div style="color: #2196d0;">
-                        ${mensajeExito}</div>
-                        <%}%>  
-                </div>
-
-                <br> 
-
-                <div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                      
-                        <div class="card">
-                            <div class="card-body">
-
-                                <form action="Compra" method="post" id="frmCompra">                                   
-
-                                    <div class="form-group d-flex row"> 
-
-                                        <div class=" form-group col-xs-6 col-sm-6 col-md-3 col-lg-4 d-flex">
-
-                                            <!--
-                                            <input type="text" name="textId" value="${proveedor.getProveedorId()}"
-                                                   class="form-control" placeholder="Buscar ID Cliente" >-->
-                                            <select  name="textProveedorId"  class="form-control">  
-
-                                                <option>Seleccione un Proveedor...</option>
-
-                                                <%
-                                                    ProveedorDAO proveedorDAO = new ProveedorDAO();
-                                                    for (ProveedorVO proveedorVO : proveedorDAO.listar()) {
-
-                                                %>
-
-                                                <option   class="form-control"
-                                                          value="<%=proveedorVO.getProveedorId()%>"><%=proveedorVO.getProveedorId()%></option>
-
-
-                                                <%}%>
-
-
-                                            </select>
-                                            <div> 
-                                                <button type="submit" name="opcion" id="buscarStock" value="buscarProveedor" class="btn btn-outline-info ">Buscar</button>
-                                                <!--<div >
-                                                    <button class="btn btn-outline-secondary bg-dark text-white" type="text" value="buscarClientes" name="opcion" style="margin-left: 5px">Buscar</button>                                            
-                                                </div>-->
-                                            </div> 
-
-                                        </div> 
-
-                                        <div class="col-xs-6 col-sm-6 col-md-4 col-lg-5 ">
-                                            <input type="text" name="textNombre"  placeholder="Nombre Proveedor" value="${proveedor.getNombreProveedor()}" class="form-control" readonly >                               
-                                        </div>
-                                        <div class="col-xs-6 col-sm-6 col-md-5 col-lg-3 ">
-                                            <%
-                                                Date dNow = new Date();
-                                                SimpleDateFormat ft
-                                                        = new SimpleDateFormat("dd/MM/yyyy");
-                                                String currentDate = ft.format(dNow);
-                                            %>
-                                            <input type="text" name="textFecha" value="<%=currentDate%>" class="form-control" readonly="" >                               
-                                        </div>                                        
-
-                                    </div> 
-
-
-
-                                    <div class="form-group d-flex row">
-
-                                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-4 d-flex" style="margin-top: 30px">
-                                            <!--
-                                            <input type="text" name="textProductoId" value="${p.getProductoId()}"
-                                                   class="form-control" placeholder="Buscar ID Producto" aria-label="Recipient's username" aria-describedby="basic-addon2" id="btnPrueba">-->
-                                            <select  name="textProductoId"  class="form-control">  
-
-                                                <option>Seleccione un Producto...</option>
-
-                                                <%
-                                                    ProductoDAO productoDAO = new ProductoDAO();
-                                                    for (ProductoVO productoVO : productoDAO.listar()) {
-
-                                                %>
-
-                                                <option   class="form-control"
-                                                          value="<%=productoVO.getProductoId()%>"><%=productoVO.getProductoNombre()%></option>
-
-
-                                                <%}%>
-
-
-                                            </select>
-
-                                            <div> 
-                                                <button type="submit" name="opcion" value="buscarProducto" class="btn btn-outline-info ">Buscar</button>
-                                                <!--<div >
-                                                    <button class="btn btn-outline-secondary bg-dark text-white" type="text" value="buscarClientes" name="opcion" style="margin-left: 5px">Buscar</button>                                            
-                                                </div>-->
-                                            </div> 
-                                        </div>                                       
-
-                                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                                            <label>Nombre Producto:</label>  
-                                            <input type="text" name="textProductoNombre" placeholder="" value="${producto.getProductoNombre()}" class="form-control" readonly>                                              
-                                        </div> 
-
-                                        <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 ">
-                                            <label>Precio:</label>   
-                                            <input type="text" name="textProductoPrecioCompra" placeholder="$" value="${producto.getProductoPrecioCompra()}" class="form-control" readonly>                                                                                     
-                                        </div>
-                                        <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 ">
-                                            <label>Cantidad:</label>   
-                                            <input type="text" name="textProductoCantidad" placeholder="" value="1" class="form-control">                                                                                     
-                                        </div>
-                                        <div class="col-xs-6 col-sm-6 col-md-2 col-lg-1">
-                                            <label>*Stock:</label>  
-                                            <input type="text" name="textProductoStock" id="stock" placeholder="" value="${producto.getStock()}" 
-                                                   class="form-control" readonly>                                            
-                                        </div>
-
-                                    </div> 
-
-
-                                    <div class="input-group-append">
-
-                                        <button type="submit" name="opcion" value="Agregar" 
-                                                class="btn btn-outline-info ">Agregar</button>
-
-                                        <!--
-                                        <button class="btn btn-outline-secondary bg-info text-white" type="text" value="Agregar" name="opcion">Agregar Venta</button>
-                                        -->
-                                    </div>
-
-
-                                </form>                          
-
-                            </div>                            
-
-                        </div>
+    <div class="content-header row">
+        <div class="content-header-left col-md-9 col-12 mb-2">
+            <div class="row breadcrumbs-top">
+                <div class="col-12">
+                    <div class="breadcrumb-wrapper">
+                        <ol class="breadcrumb bg-light">
+                            <li class="breadcrumb-item"><a href="inicio.jsp">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-item active">Compras
+                            </li>
+                        </ol>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                    <form action="Compra" method="post" id="frmNuevaVenta">
-
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-
-
-                            <div class="card">
-                                <div class="card-body">
+    <!-- BEGIN: Content-->
+    <div class="content-body">
 
 
 
-                                    <table class="table table-hover table-sm table-responsive-xl">
+        <div class="container">
+            <%                                    if (request.getAttribute(
+                        "mensajeError") != null) {
+            %>
+            <div style="color: red;">
+                ${mensajeError}</div>
+                <% } else {%> 
+            <div style="color: #2196d0;">
+                ${mensajeExito}</div>
+                <%}%>  
+        </div>
 
-                                        <thead class="bg-blue text-white text-center">
-                                            <tr>
-                                                <th>ITEM</th>                                            
-                                                <th>CÓDIGO</th>
-                                                <th>NOMBRE</th>                                            
-                                                <th>P.COMPRA</th>
-                                                <th>CANTIDAD</th>
-                                                <th>SUBTOTAL</th>
+        <br> 
 
-                                            </tr>
-                                        </thead>
+        <div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                      
+                <div class="card">
+                    <div class="card-body">
 
-                                        <tbody class="text-right">
+                        <form action="Compra" method="post" id="frmCompra">                                   
 
-                                            <c:forEach var="list" items="${lista}">
+                            <div class="form-group d-flex row"> 
 
-                                                <tr>
-                                                    <td>${list.getItem()}</td>                                                
-                                                    <td>${list.getIdProducto()}</td>
-                                                    <td>${list.getDescripcionP()}</td>                                                
-                                                    <td>$ ${list.getPrecio()}</td>
-                                                    <td class="btn-group">
-                                                        <input type="hidden" id="idpro" value="${list.getIdProducto()}">
-                                                        <input type="number" id="Cantidad" value="${list.getCantidad()}" class="form-control col-md-8 text-center" min="1">
-                                                    </td>                                                    
-                                                    <td>$ ${list.getSubtotal()}</td>
+                                <div class=" form-group col-xs-6 col-sm-6 col-md-3 col-lg-4 d-flex">
 
-                                                    <td class="btn-group">  
-                                                        
-                                                        <input type="hidden" id="idp" value="${list.getIdProducto()}">
-                                                        
-                                                        <a href="#" id="btnBorrar" class="btn btn-danger btn-sm text-white material-icons" style="margin-left: 5px">delete</a>
-                                                        
-                                                    </td>
+                                    <!--
+                                    <input type="text" name="textId" value="${proveedor.getProveedorId()}"
+                                           class="form-control" placeholder="Buscar ID Cliente" >-->
+                                    <select  name="textProveedorId"  class="form-control">  
 
-                                                </tr>
+                                        <option>Seleccione un Proveedor...</option>
 
+                                        <%
+                                            ProveedorDAO proveedorDAO = new ProveedorDAO();
+                                            for (ProveedorVO proveedorVO : proveedorDAO.listar()) {
 
-                                            </c:forEach>                                        
+                                        %>
 
-
-                                        </tbody>
-
-                                    </table>
+                                        <option   class="form-control"
+                                                  value="<%=proveedorVO.getProveedorId()%>"><%=proveedorVO.getProveedorId()%></option>
 
 
+                                        <%}%>
 
+
+                                    </select>
+                                    <div> 
+                                        <button type="submit" name="opcion" id="buscarStock" value="buscarProveedor" class="btn btn-outline-info ">Buscar</button>
+                                        <!--<div >
+                                            <button class="btn btn-outline-secondary bg-dark text-white" type="text" value="buscarClientes" name="opcion" style="margin-left: 5px">Buscar</button>                                            
+                                        </div>-->
+                                    </div> 
+
+                                </div> 
+
+                                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-5 ">
+                                    <input type="text" name="textNombre"  placeholder="Nombre Proveedor" value="${proveedor.getNombreProveedor()}" class="form-control" readonly >                               
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-5 col-lg-3 ">
+                                    <%
+                                        Date dNow = new Date();
+                                        SimpleDateFormat ft
+                                                = new SimpleDateFormat("dd/MM/yyyy");
+                                        String currentDate = ft.format(dNow);
+                                    %>
+                                    <input type="text" name="textFecha" value="<%=currentDate%>" class="form-control" readonly="" >                               
+                                </div>                                        
+
+                            </div> 
+
+
+
+                            <div class="form-group d-flex row">
+
+                                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-4 d-flex" style="margin-top: 30px">
+                                    <!--
+                                    <input type="text" name="textProductoId" value="${p.getProductoId()}"
+                                           class="form-control" placeholder="Buscar ID Producto" aria-label="Recipient's username" aria-describedby="basic-addon2" id="btnPrueba">-->
+                                    <select  name="textProductoId"  class="form-control">  
+
+                                        <option>Seleccione un Producto...</option>
+
+                                        <%
+                                            ProductoDAO productoDAO = new ProductoDAO();
+                                            for (ProductoVO productoVO : productoDAO.listar()) {
+
+                                        %>
+
+                                        <option   class="form-control"
+                                                  value="<%=productoVO.getProductoId()%>"><%=productoVO.getProductoNombre()%></option>
+
+
+                                        <%}%>
+
+
+                                    </select>
+
+                                    <div> 
+                                        <button type="submit" name="opcion" value="buscarProducto" class="btn btn-outline-info ">Buscar</button>
+                                        <!--<div >
+                                            <button class="btn btn-outline-secondary bg-dark text-white" type="text" value="buscarClientes" name="opcion" style="margin-left: 5px">Buscar</button>                                            
+                                        </div>-->
+                                    </div> 
+                                </div>                                       
+
+                                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                                    <label>Nombre Producto:</label>  
+                                    <input type="text" name="textProductoNombre" placeholder="" value="${producto.getProductoNombre()}" class="form-control" id="producto" readonly>                                              
+                                </div> 
+
+                                <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 ">
+                                    <label>Precio:</label>   
+                                    <input type="text" name="textProductoPrecioCompra" placeholder="$" value="${producto.getProductoPrecioCompra()}" class="form-control" readonly>                                                                                     
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2 ">
+                                    <label>Cantidad:</label>   
+                                    <input type="text" name="textProductoCantidad" placeholder="" value="1" class="form-control">                                                                                     
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-2 col-lg-1">
+                                    <label>*Stock:</label>  
+                                    <input type="text" name="textProductoStock" id="stock" placeholder="" value="${producto.getStock()}" 
+                                           class="form-control" readonly>                                            
                                 </div>
 
-                                <div class="card-footer d-flex bg-white">
+                            </div> 
 
-                                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 ml-auto">
-                                        <input type="text" name="textTotal" value="$ ${totalpagar}" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="card-footer d-flex bg-white">
-                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 ml-auto">
-                                        <!--<input type="reset" name="opcion" value="Cancelar" class="btn btn-danger">                                    
-    
-                                        -->
-                                        <a href="Compra?opcion=limpiarTabla" class="btn btn-light">Cancelar</a> 
-                                        <a href="Compra?opcion=GenerarCompra" class="btn btn-success text-white">Generar Compra</a> 
+                            <div class="card-footer d-flex bg-white">
+                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-1 ml-auto">
 
+                                    <button type="submit" name="opcion" value="Agregar" 
+                                            class="btn btn-info mr-1" id="agregar" >Agregar</button>
 
-                                    </div>                                
-                                </div>
+                                </div>                                
                             </div>
 
 
+                        </form>                          
+
+                    </div>                            
+
+                </div>
+            </div>
+
+            <form action="Compra" method="post" id="frmNuevaCompra">
+
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+
+
+                    <div class="card">
+                        <div class="card-body">
+
+
+                            <table class="table table-hover table-sm table-responsive-xl">
+
+                                <thead class="thead">
+                                    <tr>
+                                        <th>ITEM</th>                                            
+                                        <th>REFERENCIA</th>
+                                        <th>NOMBRE</th>                                            
+                                        <th>PRECIO COMPRA</th>
+                                        <th>CANTIDAD</th>
+                                        <th>SUBTOTAL</th>
+                                        <th></th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <c:forEach var="list" items="${lista}">
+
+                                        <tr>
+                                            <td>${list.getItem()}</td>                                                
+                                            <td>${list.getIdProducto()}</td>
+                                            <td>${list.getDescripcionP()}</td>                                                
+                                            <td>$ ${list.getPrecio()}</td>
+                                            <td class="btn-group">
+                                                <input type="hidden" id="idpro" value="${list.getIdProducto()}">
+                                                <input type="number" id="Cantidad" value="${list.getCantidad()}" class="form-control col-md-8 text-center" min="1">
+                                            </td>                                                    
+                                            <td>$ ${list.getSubtotal()}</td>
+
+                                            <td class="btn-group">  
+
+                                                <input type="hidden" id="idp" value="${list.getIdProducto()}">
+
+                                                <a href="#" id="btnBorrar" class="lnr lnr-trash " style="margin-left: 5px"></a>
+
+                                            </td>
+
+                                        </tr>
+
+
+                                    </c:forEach>                                        
+
+
+                                </tbody>
+
+                            </table>
+
+
+
                         </div>
 
-                    </form>
+                        <div class="card-footer d-flex bg-white">
+
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 ml-auto">
+                                <input type="text" name="textTotal" value="$ ${totalpagar}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex bg-white">
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 ml-auto">
+                                <!--<input type="reset" name="opcion" value="Cancelar" class="btn btn-danger">                                    
+
+                                -->
+                                <a href="Compra?opcion=limpiarTabla" class="btn btn-outline-secondary">Cancelar</a> 
+                                <a href="Compra?opcion=GenerarCompra" class="btn btn-info mr-1">Generar Compra</a> 
 
 
-            </main>           
-            <footer>
-                <div>
-                    <section id="fcred" class="col-xs-12 col-sm- col-md-12 col-lg-">
-                        <p>Todos los Derechos Reservados &copy;</p>
-                    </section>
+                            </div>                                
+                        </div>
+                    </div>
+
+
                 </div>
 
-            </footer>            
+            </form>
+
         </div>
+
+        <!-- /#wrapper -->
+
+        <!-- BEGIN: Vendor JS-->
+        <script src="app-assets/vendors/js/vendors.min.js"></script>
+        <!-- BEGIN Vendor JS-->
+
+        <!-- BEGIN: Page Vendor JS-->
+        <script src="app-assets/vendors/js/charts/apexcharts.min.js"></script>
+        <script src="app-assets/vendors/js/extensions/toastr.min.js"></script>
+        <!-- END: Page Vendor JS-->
+
+        <!-- BEGIN: Theme JS-->
+        <script src="app-assets/js/core/app-menu.js"></script>
+        <script src="app-assets/js/core/app.js"></script>
+        <!-- END: Theme JS-->
+
+        <!-- BEGIN: Page JS-->
+        <script src="app-assets/js/scripts/pages/dashboard-ecommerce.js"></script>
+        <!-- END: Page JS-->
+
+        <!-- BEGIN: Page Vendor JS-->
+        <script src="app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js"></script>
+        <script src="app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+        <script src="app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+        <script src="app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js"></script>
+        <script src="app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>
+        <script src="app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
+        <script src="app-assets/vendors/js/tables/datatable/jszip.min.js"></script>
+        <script src="app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
+        <script src="app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
+        <script src="app-assets/vendors/js/tables/datatable/buttons.html5.min.js"></script>
+        <script src="app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
+        <script src="app-assets/vendors/js/tables/datatable/dataTables.rowGroup.min.js"></script>
+        <script src="app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
+        <!-- END: Page Vendor JS-->
+
+        <!-- DATATABLES -->
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
+        </script>
+        <!-- BOOTSTRAP -->
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js">
+        </script>
+
+        <script>
+            $(window).on('load', function () {
+                if (feather) {
+                    feather.replace({
+                        width: 14,
+                        height: 14
+                    });
+                }
+            })
+        </script>
 
         <!-- Bootstrap core JavaScript -->
         <script src="template/jquery.min.js"></script>
@@ -312,10 +391,30 @@
 
         <!-- Menu Toggle Script -->
         <script>
-            $("#menu-toggle").click(function (e) {
-                e.preventDefault();
-                $("#wrapper").toggleClass("toggled");
-            });
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
         </script>
-    </body>
+
+        <script type="text/javascript">
+
+
+            $(document).ready(function () {
+
+                var producto = $('#frmCompra #producto').val();
+
+
+                if (producto === "") {
+
+                    $("#frmCompra #agregar").hide()();
+                    //return false;
+                }
+
+            });
+
+
+        </script>
+
+
 </html>

@@ -65,10 +65,10 @@ public class BodegaControlador extends HttpServlet {
 
                 if (bodegasDAO.actualizarRegistro()) {
 
-                    request.setAttribute("mensajeExito", "Actualización Exitosa");
+                    request.setAttribute("mensajeExito", "La bodega se actualizó correctamente");
 
                 } else {
-                    request.setAttribute("mensajeError", "La Bodega NO se actualizó correctamente");
+                    request.setAttribute("mensajeError", "La bodega NO se actualizó correctamente");
 
                 }
                 request.getRequestDispatcher("bodega.jsp").forward(request, response);
@@ -84,7 +84,7 @@ public class BodegaControlador extends HttpServlet {
                     request.getRequestDispatcher("bodega.jsp").forward(request, response);
 
                 } else {
-                    request.setAttribute("mensajeError", "La Bodega NO existe");
+                    request.setAttribute("mensajeError", "La bodega NO existe");
                 }
                 request.getRequestDispatcher("bodega.jsp").forward(request, response);
                 break;
@@ -96,11 +96,11 @@ public class BodegaControlador extends HttpServlet {
 
                 if (bodegaVO == null) {
 
-                    request.setAttribute("mensajeExito", "La Bodega se borró correctamente");
+                    request.setAttribute("mensajeExito", "La bodega se borró correctamente");
 
                 } else {
 
-                    request.setAttribute("mensajeError", "La Bodega NO se eliminó");
+                    request.setAttribute("mensajeError", "La bodega NO se eliminó");
                 }
                 request.getRequestDispatcher("bodega.jsp").forward(request, response);
                 break;
@@ -116,7 +116,7 @@ public class BodegaControlador extends HttpServlet {
                     request.getRequestDispatcher("bodega.jsp").forward(request, response);
 
                 } else {
-                    request.setAttribute("mensajeError", "El Bodega NO existe");
+                    request.setAttribute("mensajeError", "El bodega NO existe");
                 }
                 request.getRequestDispatcher("bodega.jsp").forward(request, response);
                 break;

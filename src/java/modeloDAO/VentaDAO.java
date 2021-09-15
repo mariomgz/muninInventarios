@@ -60,7 +60,7 @@ public class VentaDAO extends Conexion implements Crud {
 
             sql = "insert into ventas (id_cliente,fecha,estado) values (?,?, 'Activo')";
             puente = conexion.prepareStatement(sql);
-            puente.setString(1, idCliente);            
+            puente.setString(1, idCliente);
             puente.setString(2, ventaFecha);
             puente.executeUpdate();
             operacion = true;
@@ -91,7 +91,7 @@ public class VentaDAO extends Conexion implements Crud {
 
             sql = "update ventas set id_cliente=?,  fecha=? where id_venta=?";
             puente = conexion.prepareStatement(sql);
-            puente.setString(1, idCliente);           
+            puente.setString(1, idCliente);
             puente.setString(2, ventaFecha);
             puente.setString(3, ventaId);
             puente.executeUpdate();
@@ -163,13 +163,6 @@ public class VentaDAO extends Conexion implements Crud {
 
             while (mensajero.next()) {
 
-                //ventaVO = new VentaVO(mensajero.getString(1), mensajero.getString(2), mensajero.getString(3), mensajero.getString(4)
-                //);
-
-                /*ventaVO.setVentaId(mensajero.getString(1));                
-                ventaVO.setIdCliente(mensajero.getString(2));
-                ventaVO.setVentaFecha(mensajero.getString(3));
-                ventaVO.setVentaEstado(mensajero.getString(4));*/
                 listaVentas.add(ventaVO);
 
             }
@@ -209,9 +202,6 @@ public class VentaDAO extends Conexion implements Crud {
 
             while (mensajero.next()) {
 
-                //ventaVO = new VentaVO(venta, mensajero.getString(2),
-                //mensajero.getString(3), mensajero.getString(4)
-                //);
             }
 
         } catch (SQLException e) {
@@ -256,7 +246,7 @@ public class VentaDAO extends Conexion implements Crud {
 
             Logger.getLogger(VentaDAO.class.getName()).log(Level.SEVERE, null, e);
 
-        } 
+        }
         /*finally {
 
             try {
@@ -281,7 +271,7 @@ public class VentaDAO extends Conexion implements Crud {
             conexion = this.obtenerConexion();
             sql = "insert into ventas (id_cliente,fecha,monto, estado) values (?,?,?, 'Activo')";
             puente = conexion.prepareStatement(sql);
-            puente.setString(1, ve.getIdCliente());            
+            puente.setString(1, ve.getIdCliente());
             puente.setString(2, ve.getFecha());
             puente.setDouble(3, ve.getMonto());
 
@@ -291,19 +281,8 @@ public class VentaDAO extends Conexion implements Crud {
 
             Logger.getLogger(VentaDAO.class.getName()).log(Level.SEVERE, null, e);
 
-        } 
-        /*finally {
-
-            try {
-
-                this.cerrarConexion();
-
-            } catch (Exception e) {
-
-                Logger.getLogger(VentaDAO.class.getName()).log(Level.SEVERE, null, e);
-
-            }
-        }*/
+        }
+        
 
         return r;
     }
@@ -326,7 +305,7 @@ public class VentaDAO extends Conexion implements Crud {
 
             Logger.getLogger(VentaDAO.class.getName()).log(Level.SEVERE, null, e);
 
-        } 
+        }
         /*finally {
 
             try {
@@ -342,28 +321,26 @@ public class VentaDAO extends Conexion implements Crud {
 
         return r;
     }
-    
+
     public class Fechas {
 
-    public  void main(String[] args) {
- 
-        //Instanciamos el objeto Calendar
-        //en fecha obtenemos la fecha y hora del sistema
-        Calendar fecha = new GregorianCalendar();
-  
-        //Obtenemos el valor del año, mes, día,
-        //hora, minuto y segundo del sistema
-        //usando el método get y el parámetro correspondiente                                                     
-        int año = fecha.get(Calendar.YEAR);
-        int mes = fecha.get(Calendar.MONTH);
-        int dia = fecha.get(Calendar.DAY_OF_MONTH);
-        
-  
-        //Mostramos por pantalla dia/mes/año
-        System.out.println("Fecha Actual: " + dia + "/" + (mes+1) + "/" + año);
-        
-                                      
+        public void main(String[] args) {
+
+            //Instanciamos el objeto Calendar
+            //en fecha obtenemos la fecha y hora del sistema
+            Calendar fecha = new GregorianCalendar();
+
+            //Obtenemos el valor del año, mes, día,
+            //hora, minuto y segundo del sistema
+            //usando el método get y el parámetro correspondiente                                                     
+            int año = fecha.get(Calendar.YEAR);
+            int mes = fecha.get(Calendar.MONTH);
+            int dia = fecha.get(Calendar.DAY_OF_MONTH);
+
+            //Mostramos por pantalla dia/mes/año
+            System.out.println("Fecha Actual: " + dia + "/" + (mes + 1) + "/" + año);
+
+        }
     }
-}
 
 }

@@ -64,10 +64,10 @@ public class CategoriaControlador extends HttpServlet {
 
                 if (categoriaDAO.actualizarRegistro()) {
 
-                    request.setAttribute("mensajeExito", "Actualización Exitosa");
+                    request.setAttribute("mensajeExito", "La categoría se actualizó correctamente");
 
                 } else {
-                    request.setAttribute("mensajeError", "La Categoria NO se actualizó correctamente");
+                    request.setAttribute("mensajeError", "La categoria NO se actualizó correctamente");
 
                 }
                 request.getRequestDispatcher("categoria.jsp").forward(request, response);
@@ -83,7 +83,7 @@ public class CategoriaControlador extends HttpServlet {
                     request.getRequestDispatcher("categoria.jsp").forward(request, response);
 
                 } else {
-                    request.setAttribute("mensajeError", "La Categoria NO existe");
+                    request.setAttribute("mensajeError", "La categoria NO existe");
                 }
                 request.getRequestDispatcher("categoria.jsp").forward(request, response);
                 break;
@@ -95,11 +95,11 @@ public class CategoriaControlador extends HttpServlet {
 
                 if (categoriaVO == null) {
 
-                    request.setAttribute("mensajeExito", "La Categoria se borró correctamente");
+                    request.setAttribute("mensajeExito", "La categoria se borró correctamente");
 
                 } else {
 
-                    request.setAttribute("mensajeError", "La Categoria NO se eliminó");
+                    request.setAttribute("mensajeError", "La categoria NO se eliminó");
                 }
                 request.getRequestDispatcher("categoria.jsp").forward(request, response);
                 break;

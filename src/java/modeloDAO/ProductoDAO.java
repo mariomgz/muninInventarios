@@ -284,6 +284,7 @@ public class ProductoDAO extends Conexion implements Crud {
     public int actualizarStock(int id, int stock) {
 
         sql = "update productos set stock=? where id_producto=?";
+        
         try {
 
             conexion = this.obtenerConexion();
@@ -298,18 +299,7 @@ public class ProductoDAO extends Conexion implements Crud {
             Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, e);
 
         }
-        /*finally {
-
-            try {
-
-                this.cerrarConexion();
-
-            } catch (Exception e) {
-
-                Logger.getLogger(ProductoDAO.class.getName()).log(Level.SEVERE, null, e);
-
-            }
-        }*/
+        
 
         return r;
 

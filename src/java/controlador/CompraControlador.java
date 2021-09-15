@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import modeloDAO.CompraDAO;
 import modeloDAO.ProductoDAO;
 import modeloDAO.ProveedorDAO;
@@ -109,6 +110,7 @@ public class CompraControlador extends HttpServlet {
                 compraVO.setFecha(fechaComoCadena);
 
                 listaCompras.add(compraVO);
+                
                 for (int i = 0; i < listaCompras.size(); i++) {
                     totalPagar = totalPagar + listaCompras.get(i).getSubtotal();
                 }
@@ -199,7 +201,7 @@ public class CompraControlador extends HttpServlet {
                 }
                 break;
 
-            case "ListaTemporal": //Lista Temporal
+            case "ListaTemporal1": //Lista Temporal
 
                 totalPagar = 0.0;
                 request.setAttribute("lista", listaCompras);

@@ -64,7 +64,7 @@ $(document).ready(function () {
         })
                 .then((willDelete) => {
                     if (willDelete) {
-                        eliminar(idp);
+                        eliminarVenta(idp);
                         swal("Registro borrado correctamente", {
                             icon: "success",
                         }).then((willDelete) => {
@@ -77,9 +77,51 @@ $(document).ready(function () {
 
     });
 
-    function eliminar(idp) {
+    function eliminarVenta(idp) {
 
         var url = "Venta?opcion=Borrar";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: "idp=" + idp,
+            success: function (data, textStatus, jqXHR) {
+
+            }
+
+        })
+    }
+
+    $("#frmNuevaCompra tr #btnBorrar").click(function () {
+
+        //var correo = $('#frmRegistro #correo').val();
+        var idp = $(this).parent().find("#idp").val();
+        //var idp = $('#idp').val();
+
+        swal({
+            title: "Seguro quieres borrar el registro?",
+            //text: "Una vex borrado, no podrás recuperar el registro",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        eliminarCompra(idp);
+                        swal("Registro borrado correctamente", {
+                            icon: "success",
+                        }).then((willDelete) => {
+                            if (willDelete) {
+                                location.href = "Compra?opcion=ListaTemporal";
+                            }
+                        });
+                    }
+                });
+
+    });
+
+    function eliminarCompra(idp) {
+
+        var url = "Compra?opcion=Borrar";
         $.ajax({
             type: 'POST',
             url: url,
@@ -103,6 +145,25 @@ $(document).ready(function () {
             data: "idp=" + idp + "&Cantidad=" + cantidad,
             success: function (data, textStatus, jqXHR) {
                 location.href = "Venta?opcion=ListaTemporal";
+            }
+
+        });
+
+    });
+
+    $("#frmNuevaCompra tr #Cantidad").click(function () {
+
+        var idp = $(this).parent().find("#idpro").val();
+        var cantidad = $(this).parent().find("#Cantidad").val();
+
+        var url = "Compra?opcion=ActualizarCantidad";
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: "idp=" + idp + "&Cantidad=" + cantidad,
+            
+            success: function (data, textStatus, jqXHR) {
+                location.href = "Compra?opcion=ListaTemporal1";
             }
 
         });

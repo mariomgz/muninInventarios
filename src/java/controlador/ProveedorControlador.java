@@ -70,7 +70,7 @@ public class ProveedorControlador extends HttpServlet {
 
                 if (proveedorDAO.actualizarRegistro()) {
 
-                    request.setAttribute("mensajeExito", "Actualización Exitosa");
+                    request.setAttribute("mensajeExito", "El proveedor se actualizó correctamente");
 
                 } else {
                     request.setAttribute("mensajeError", "El proveedor NO se actualizó correctamente");

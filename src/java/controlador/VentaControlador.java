@@ -52,7 +52,8 @@ public class VentaControlador extends HttpServlet {
     String fechaComoCadena = sdf.format(new Date());
     String stock;
 
-    VentaVO ventaVO = new VentaVO();
+    //VentaVO ventaVO = new VentaVO();
+    VentaVO ventaVO = null;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -89,7 +90,8 @@ public class VentaControlador extends HttpServlet {
 
                 break;
 
-            case "Agregar": //Agregar Venta a la lista
+            case "Agregar": //Agregar Venta a la lista                  
+
                 request.setAttribute("c", c);
 
                 stock = request.getParameter("textProductoStock");
@@ -102,9 +104,7 @@ public class VentaControlador extends HttpServlet {
                 cantidad = Integer.parseInt(request.getParameter("textProductoCantidad"));
                 subtotal = precio * cantidad;
 
-                //fecha=request.getParameter("textFecha");
                 ventaVO = new VentaVO();
-
                 ventaVO.setItem(item);
                 ventaVO.setIdProducto(cod);
                 ventaVO.setDescripcionP(descripcion);
@@ -113,7 +113,7 @@ public class VentaControlador extends HttpServlet {
                 ventaVO.setSubtotal(subtotal);
                 ventaVO.setFecha(fechaComoCadena);
 
-                if (Integer.parseInt(stock) > 0) {
+                if (Integer.parseInt(stock) > 0 && (cantidad) <= Integer.parseInt(stock)) {
 
                     listaVentas.add(ventaVO);
                     for (int i = 0; i < listaVentas.size(); i++) {
@@ -125,11 +125,12 @@ public class VentaControlador extends HttpServlet {
 
                 } else {
                     request.setAttribute("lista", listaVentas);
-                    request.setAttribute("mensajeError", "No hay existencia del producto");
+                    request.setAttribute("mensajeError", "No hay existencias suficientes del producto");
                 }
 
+                //request.setAttribute("mensajeError", "Ingrese un Producto");
                 request.getRequestDispatcher("nuevaVenta.jsp").forward(request, response);
-
+                
                 break;
 
             case "GenerarVenta": //Agregar Venta
@@ -184,47 +185,6 @@ public class VentaControlador extends HttpServlet {
 
                 break;
 
-            /*case "Actualizar": //Actualizar Registro
-
-                if (ventaDAO.actualizarRegistro()) {
-
-                    request.setAttribute("mensajeExito", "La venta se actualizó correctamente");
-
-                } else {
-                    request.setAttribute("mensajeError", "La venta NO se actualizó correctamente");
-                }
-                request.getRequestDispatcher("nuevaVenta.jsp").forward(request, response);
-                break;
-
-            case "Consultar": //Consultar Documento
-
-                ventaVO = ventaDAO.consultarDocumento(ventaId);
-
-                if (ventaVO != null) {
-
-                    request.setAttribute("datosConsultados", ventaVO);
-                    request.getRequestDispatcher("registrarVenta.jsp").forward(request, response);
-
-                } else {
-                    request.setAttribute("mensajeError", "La venta NO existe");
-                }
-                request.getRequestDispatcher("registrarVenta.jsp").forward(request, response);
-                break;
-
-            case "ConsultarEliminar": //Consultar Documento para Eliminar
-
-                ventaVO = ventaDAO.consultarDocumento(clienteId);
-
-                if (ventaVO != null) {
-
-                    request.setAttribute("datosConsultados", ventaVO);
-                    request.getRequestDispatcher("eliminarVenta.jsp").forward(request, response);
-
-                } else {
-                    request.setAttribute("mensajeError", "La venta NO existe");
-                }
-                request.getRequestDispatcher("venta.jsp").forward(request, response);
-                break;*/
             case "Borrar": //Borrar Registro
 
                 int idProducto = Integer.parseInt(request.getParameter("idp"));
@@ -253,9 +213,9 @@ public class VentaControlador extends HttpServlet {
                 break;
 
             case "ListaTemporal": //Lista Temporal
-                                
+
                 totalPagar = 0.0;
-                request.setAttribute("lista", listaVentas);                
+                request.setAttribute("lista", listaVentas);
 
                 for (int i = 0; i < listaVentas.size(); i++) {
 
